@@ -371,6 +371,141 @@ html.dark .icon-moon { display: none; }
     margin-inline: auto;
 }
 
+/* ============ INTERACTIVIDAD ============ */
+:root {
+    --shadow-hover: 0 10px 24px rgb(0 0 0 / 0.15);
+}
+html.dark {
+    --shadow-hover: 0 10px 24px rgb(2 6 23 / 0.7);
+}
+
+/* Transiciones base (aquí está también background-color y border-color
+   para no pisar la transición del tema que ya tenías) */
+.proyecto--container, .habilidades--card, .contacto--wrapper {
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+                background-color 0.4s, color 0.4s, border-color 0.4s;
+}
+.foto, .experience-container, .proyecto--imagen,
+.button-rotar, .contacto--form button,
+.bg-accent-soft, .bg-accent {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease,
+                background-color 0.4s, color 0.4s;
+}
+
+/* Subrayado animado reutilizable para enlaces */
+.navbar--list_wrapper a,
+footer a {
+    background: linear-gradient(currentColor, currentColor) left bottom / 0% 2px no-repeat;
+    transition: background-size 0.3s ease, color 0.3s;
+    padding-bottom: 2px;
+}
+
+/* Chips de tecnologías: brillo en vez de escalado */
+.bg-chip {
+    transition: box-shadow 0.3s ease, background-color 0.4s, color 0.4s;
+}
+
+/* Iconos de las tarjetas de habilidades */
+.habilidades--card i {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Foco visible para teclado (también es "interactividad") */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 3px;
+    border-radius: 0.3em;
+}
+
+@media (hover: hover) {
+
+    /* --- Navegación y footer --- */
+    .navbar--list_wrapper a:hover,
+    footer a:hover {
+        background-size: 100% 2px;
+        color: var(--primary);
+    }
+    .navbar--list_wrapper:hover { box-shadow: var(--shadow-hover); }
+
+    /* --- Botón de tema y botones de giro --- */
+    .theme-toggle:hover { transform: scale(1.1) rotate(15deg); }
+    .button-rotar:hover { transform: scale(1.15); color: var(--secondary); }
+    .button-rotar:active { transform: scale(0.95); }
+
+    /* --- Hero --- */
+    .foto:hover {
+        transform: scale(1.05);
+        filter: contrast(1.02);
+    }
+    .experience-container:hover { transform: scale(1.03); }
+
+    /* --- Badges y chips (cosas pequeñas: aquí sí 1.1) --- */
+    .bg-accent-soft:hover, .bg-accent:hover {
+        transform: scale(1.1);
+    }
+
+    /* --- Proyectos --- */
+    .proyecto--container:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-hover);
+    }
+    .proyecto--container:hover .proyecto--imagen {
+        transform: scale(1.03);
+    }
+
+    .bg-chip:hover {
+        transform: none;   /* anula el scale(1.1) general */
+        box-shadow:
+            0 0 6px  color-mix(in srgb, var(--primary) 70%, transparent),
+            0 0 16px color-mix(in srgb, var(--primary) 45%, transparent);
+        cursor: default;
+    }
+
+    /* --- Habilidades --- */
+    .habilidades--card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-hover);
+    }
+    .habilidades--card:hover i {
+        transform: scale(1.2) rotate(-8deg);
+    }
+
+    /* --- Contacto --- */
+    .contacto--wrapper:hover { box-shadow: var(--shadow-hover); }
+    .contacto--form input:hover,
+    .contacto--form textarea:hover {
+        border-color: var(--secondary);
+    }
+    .contacto--form button:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: var(--shadow-hover);
+    }
+    .contacto--form button:active { transform: scale(0.97); }
+
+     h1:hover, h2:hover, h3:hover, h4:hover {
+        background-size: 100% 3px;
+    }
+}
+
+.contacto--form input,
+.contacto--form textarea {
+    transition: border-color 0.25s, box-shadow 0.25s, background-color 0.4s;
+}
+.contacto--form input:focus,
+.contacto--form textarea:focus {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--secondary) 25%, transparent);
+}
+.contacto--form button { cursor: pointer; }
+
+/* Subrayado animado de izquierda a derecha en encabezados */
+h1, h2 {
+    width: fit-content;   /* el subrayado solo cubre el texto, no toda la línea */
+    background: linear-gradient(currentColor, currentColor) left bottom / 0% 3px no-repeat;
+    padding-bottom: 4px;
+    transition: background-size 0.4s ease, color 0.3s;
+}
+
 @media (prefers-reduced-motion: reduce) {
     body, .header, .presentacion, .proyectos, .habilidades, .contacto,
     .proyecto--container, .habilidades--card, .card-header, .card-footer,
