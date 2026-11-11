@@ -1,9 +1,7 @@
-export function InitFlipCard () {
+export function initFlipCard () {
     let buttonGuay = document.querySelector('.button-guay');
     let buttonGuayReverse = document.querySelector('.button-guay-reverse');
     let experience = document.querySelector('.experience');
-
-    console.log(buttonGuay);
 
     buttonGuay.addEventListener('click', () => {
         console.log('pulsao');

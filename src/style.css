@@ -1,23 +1,77 @@
 @import "tailwindcss";
 
+/* Colores que Tailwind convierte en clases (bg-chip, text-accent...) */
+@theme {
+    --color-chip: #d1d5db;
+    --color-accent: #022c22;
+    --color-on-accent: #dcfce7;
+    --color-accent-soft: #a7f3d0;
+    --color-muted: #4b5563;
+}
+
 :root {
+    color-scheme: light;
     --primary: #1E382B;
+    --on-primary: #ffffff;
     --secondary: #52796F;
     --tertiary: #84A98C;
     --neutral: #F4F7F4;
     --neutral-2: #edeff3;
+    --card: #ffffff;
+    --text: #1f2a24;
     --color-borders: #C4C7C5;
-
-    --ancho-estandar: 1440px;
 }
+
+
 
 * {
     box-sizing: border-box;
     
 }
 
+/* Transición suave al cambiar de tema (sin tocar el flip card) */
+body, .header, .presentacion, .proyectos, .habilidades, .contacto,
+.proyecto--container, .habilidades--card, .card-header, .card-footer,
+.contacto--wrapper, .contacto--form {
+    transition: background-color 0.4s, color 0.4s, border-color 0.4s;
+}
+
+html { 
+    scroll-behavior: smooth; scroll-padding-top: 5rem; 
+}
+
+html.dark {
+    color-scheme: dark;
+    --primary: #7dd3fc;        /* azul cielo, para títulos y botones */
+    --on-primary: #0b1426;
+    --secondary: #60a5fa;
+    --tertiary: #3b82f6;
+    --neutral: #0b1426;        /* fondo principal: azul marino muy oscuro */
+    --neutral-2: #111d35;      /* secciones y cabeceras de tarjeta */
+    --card: #17264a;           /* tarjetas, formulario */
+    --text: #e2e8f0;
+    --color-borders: #25365c;
+
+    --color-chip: #1e2f55;
+    --color-accent: #7dd3fc;
+    --color-on-accent: #0b1426;
+    --color-accent-soft: #1e3a8a;
+    --color-muted: #94a3b8;
+}
+
+html.dark img {
+    filter: brightness(0.9);
+}
+html.dark .foto,
+html.dark .front,
+html.dark .back {
+    box-shadow: 2px 7px 16px rgb(2 6 23 / 0.7);
+}
+
 body {
     font-family: 'Courier New', Courier, monospace;
+    background-color: var(--neutral);
+    color: var(--text);
 }
 
 .header {
@@ -55,6 +109,16 @@ body {
     display: flex;
     gap: 2em;
 }
+
+.theme-toggle { cursor: pointer; transition: transform 0.2s; }
+.theme-toggle:hover { transform: scale(1.1) }
+.theme-toggle:focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+
+.icon-sun { 
+    display: none;
+}
+html.dark .icon-sun { display: inline; }
+html.dark .icon-moon { display: none; }
 
 .article--wrapper {
     width: min(100% - 3rem, 1400px);
@@ -259,7 +323,7 @@ body {
 .contacto--wrapper {
     width: min(100% - 3rem, 1100px);
     margin-inline: auto;
-    background-color: white;
+    background-color: var(--card);
     border-radius: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -280,7 +344,8 @@ body {
     border: 1px solid var(--color-borders);
     border-radius: 0.5em;
     padding: 0.6em 0.8em;
-    background-color: white;
+    background-color: var(--card);
+    color: var(--text);
     width: 100%;
 }
 
@@ -292,7 +357,7 @@ body {
 
 .contacto--form button {
     background-color: var(--primary);
-    color: white;
+    color: var(--on-primary);
     border-radius: 1em;
     padding: 0.5em 1em;
 }
@@ -304,4 +369,13 @@ body {
     gap: 1em;
     padding: 3.5em 2.5em;
     margin-inline: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body, .header, .presentacion, .proyectos, .habilidades, .contacto,
+    .proyecto--container, .habilidades--card, .card-header, .card-footer,
+    .contacto--wrapper, .contacto--form { transition: none; }
+
+    html { scroll-behavior: auto; }
+    .experience { transition: none; }
 }

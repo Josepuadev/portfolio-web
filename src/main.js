@@ -1,6 +1,10 @@
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import { initContactForm } from './js/formValidator';
-import { InitFlipCard } from './js/flipCard';
+import { initFlipCard } from './js/flipCard';
+import { initThemeToggle } from './js/modoOscuro';
 
 initContactForm();
-InitFlipCard();
+initFlipCard();
+initThemeToggle();
+
+
